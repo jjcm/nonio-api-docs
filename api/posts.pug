@@ -64,41 +64,8 @@ block content
     +auth
     
 
-
-  .endpoint
-    h2 <span>POST</span> /post/create
-    p.
-      [IN API] - Accepts a JSON payload to create a new post in the database
-
-    h3 Requirements
-    ul
-      li
-        h4 Authentication
-        div With no auth, should return
-        :code(javascript)
-          401 Unauthorized
-
-    h3 Example payload
-    :code(javascript)
-      {
-        "title": "My Cool Post!",
-        "url": "my-neato-post-wow",
-        "content": "This is the long form content for this post...",
-        "type": "blog"
-      }
-
-    h3 Example response
-    :code(javascript)
-      {
-          "title": "My Cool Post!",
-          "user": "lapubell",
-          "time": "2019-11-04 04:11PM",
-          "url": "my-neto-post-wow",
-          "tags": []
-      }
-
-  .endpoint
-    h2 <span>GET</span> /posts/:url
+  .endpoint#get_post
+    h2 <span>GET</span> /post/:url
     p.
       [IN API] - Returns the data for a single post, referenced by its url.
       The date for the tags is the date the postTag association was first created.
@@ -136,6 +103,40 @@ block content
             "date": "2018-02-14 10:44pm"
           }
       }
+      
+
+  .endpoint#post_post_create
+    h2 <span>POST</span> /post/create
+    p.
+      [IN API] - Accepts a JSON payload to create a new post in the database
+
+    h3 Requirements
+    ul
+      li
+        h4 Authentication
+        div With no auth, should return
+        :code(javascript)
+          401 Unauthorized
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "title": "My Cool Post!",
+        "url": "my-neato-post-wow",
+        "content": "This is the long form content for this post...",
+        "type": "blog"
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+          "title": "My Cool Post!",
+          "user": "lapubell",
+          "time": "2019-11-04 04:11PM",
+          "url": "my-neto-post-wow",
+          "tags": []
+      }
+
 
   .endpoint
     h2 <span>GET</span> /posts/url-is-available/:url
