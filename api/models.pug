@@ -1,7 +1,7 @@
 block content
   h1 Models
-  .courseContent.models
-    .endpoint
+  .models
+    .model#model_post
       h2 Post
       :code(javascript)
         post: {
@@ -15,7 +15,7 @@ block content
           type: String,
           tags: Array('postTag')
         }
-    .endpoint
+    .model#model_user
       h2 User
       :code(javascript)
         user: {
@@ -28,7 +28,7 @@ block content
           password: String,
           password_change_request_hash: String
         }
-    .endpoint
+    .model#model_post_tag
       h2 PostTag
       :code(javascript)
         postTag: {
@@ -38,7 +38,17 @@ block content
           downvotes: Number,
           date: Date
         }
-    .endpoint
+    .model#model_post_tag_vote
+      h2 PostTagVote
+      :code(javascript)
+        postTag: {
+          tag: 'tag',
+          post: 'post',
+          upvotes: Number,
+          downvotes: Number,
+          date: Date
+        }
+    .model#model_tag
       h2 Tag
       :code(javascript)
         tag: {
@@ -46,17 +56,7 @@ block content
           createdBy: 'user',
           createdDate: Date
         }
-    .endpoint
-      h2 Vote
-      :code(javascript)
-        userVote: {
-          post: 'post',
-          tag: 'tag',
-          user: 'user',
-          date: Date,
-          positive: Boolean
-        }
-    .endpoint
+    .model#model_comment
       h2 Comment
       :code(javascript)
         comment: {
@@ -70,7 +70,7 @@ block content
           parent: 'comment'
           children: Array('comment')
         }
-    .endpoint
+    .model#model_comment_vote
       h2 CommentVote
       :code(javascript)
         commentVote: {
@@ -79,17 +79,4 @@ block content
           user: 'user',
           date: Date,
           positive: Boolean
-        }
-    .endpoint
-      h2 PostReport
-      :code(javascript)
-        postReport: {
-          post: 'post',
-          fromUser: 'user',
-          reportedUser: 'user',
-          post: 'post',
-          comment: 'comment',
-          reasonNotOC: Boolean,
-          reasonIllegal: Boolean,
-          reason: String
         }
