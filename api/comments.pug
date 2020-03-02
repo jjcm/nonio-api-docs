@@ -140,7 +140,7 @@ block content
         ]
       }
 
-  .endpoint
+  .endpoint#get_comment_comments
     h2 <span>GET</span> /comments/comment/:comment
     p.
       Should return a comment and all of its descendants, plus a parent comment if it exists. Child comments and other descendants should be arranged in a parent-child relationship. Comments at the same level of hierarchy should be sorted by (upvotes - downvotes). 
@@ -207,54 +207,65 @@ block content
         ]
       }
 
-  .endpoint
-    h2 <span>GET</span> /comments/user/:user
+  .endpoint#post_comment_create
+    h2 <span>POST</span> /comment/create
     p.
-      Should return 100 comments for a user along with their parent comment (if it exists), sorted by date (most recent first). No child comments should be loaded.
+      Allows the creation of a comment on a specific post. Can either be a top level comment or a reply to an existing comment.
 
-    +offset
+    h3 Example payload
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+      }
 
     h3 Example response
     :code(javascript)
       {
-        "comments": [
-          {
-            "id": "YPGpbT",
-            "date": "2018-02-14 10:44pm",
-            "post": "non.io/this_is_crazy", 
-            "type": "text",
-            "content": null,
-            "text": "I really like this",
-            "user": "bojackson",
-            "upvotes": 144,
-            "downvotes": 38,
-            "parent": null
-          },
-          {
-            "id": "qc33cG",
-            "date": "2018-01-10 1:23pm",
-            "post": "non.io/pic_i_took_at_sunset", 
-            "type": "image",
-            "content": "img.non.io/comments/qc33cG.jpg",
-            "text": "kinda reminds me of this pic",
-            "user": "bojackson",
-            "upvotes": 42,
-            "downvotes": 7,
-            "parent": {
-              "id": "E2j2aa",
-              "date": "2018-01-10 1:42pm",
-              "post": "non.io/pic_i_took_at_sunset", 
-              "type": "text",
-              "content": null,
-              "text": "Does anyone have any related stuff?",
-              "user": "ninnymo",
-              "upvotes": 122,
-              "downvotes": 68,
-              "parent": null,
-            }
-          },
-
-          ...etc
-
-        ]
+        "id": "YPGpbT",
+        "date": "2018-02-14 10:44pm",
+        "post": "non.io/this_is_crazy", 
+        "type": "text",
+        "content": null,
+        "text": "I really like this",
+        "user": "bojackson",
+        "upvotes": 144,
+        "downvotes": 38,
+        "parent": null
       }
+
+  .endpoint#post_comment_update
+    h2 <span>POST</span> /comment/update/:comment
+    p.
+      Allows for the update of a specific comment. Comment must be made by the user updating it.
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "id": "YPGpbT",
+        "date": "2018-02-14 10:44pm",
+        "post": "non.io/this_is_crazy", 
+        "type": "text",
+        "content": null,
+        "text": "I really like this",
+        "user": "bojackson",
+        "upvotes": 144,
+        "downvotes": 38,
+        "parent": null
+      }
+
+  .endpoint#post_comment_delete
+    h2 <span>POST</span> /comment/delete/:comment
+    p.
+      Deletes a specific comment. Comment must be made by the user deleting it.
+
+    h3 Example response
+    :code(javascript)
+      true

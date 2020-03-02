@@ -32,10 +32,10 @@ mixin endpoint(type, path, id, todo)
   .category Comments
   +endpoint('GET', '/comments/post/:post', '#get_post_comments')
   +endpoint('GET', '/comments/user/:user', '#get_user_comments')
-  +endpoint('GET', '/comments/comment/:comment', '#get_comment_comments')
+  +endpoint('GET', '/comments/comment/:comment', '#get_comment_comments', true)
   +endpoint('POST', '/comment/create', '#post_comment_create')
-  +endpoint('POST', '/comment/update/:comment', '#post_comment_update')
-  +endpoint('POST', '/comment/delete/:comment', '#post_comment_delete')
+  +endpoint('POST', '/comment/update/:comment', '#post_comment_update', true)
+  +endpoint('POST', '/comment/delete/:comment', '#post_comment_delete', true)
   .category User
   +endpoint('POST', '/user/login', '#post_user_login')
   +endpoint('POST', '/user/register', '#post_user_register')
