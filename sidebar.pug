@@ -1,7 +1,9 @@
-mixin endpoint(type, path, id)
+mixin endpoint(type, path, id, todo)
   a.endpoint(href=id) 
     span(class=type)=type
     = path
+    if todo
+      .todo TODO
 
 #sidebar
   .category API Server
@@ -16,10 +18,10 @@ mixin endpoint(type, path, id)
   a.endpoint(href="#model_comment_vote") CommentVote
   .category Posts
   +endpoint('GET', '/posts', '#get_posts')
-  +endpoint('GET', '/post/view/:url', '#get_post_view')
+  +endpoint('GET', '/post/view/:url', '#get_post')
   +endpoint('POST', '/post/create/:url', '#post_post_create')
-  +endpoint('POST', '/post/update/:url', '#post_post_update')
-  +endpoint('POST', '/post/delete/:url', '#post_post_delete')
+  +endpoint('POST', '/post/update/:url', '#post_post_update', true)
+  +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)
   +endpoint('GET', '/post-url-is-available', '#get_post_url_is_available')
   .category Tags
   +endpoint('GET', '/tags', '#get_tags')
@@ -28,11 +30,12 @@ mixin endpoint(type, path, id)
   +endpoint('POST', '/posttag/add-vote', '#post_posttag_add_vote')
   +endpoint('POST', '/posttag/remove-vote', '#post_posttag_remove_vote')
   .category Comments
-  +endpoint('GET', '/comments/:post', '#get_comments')
-  +endpoint('GET', '/comment/view/:id', '#get_comment_view')
+  +endpoint('GET', '/comments/post/:post', '#get_post_comments')
+  +endpoint('GET', '/comments/user/:user', '#get_user_comments')
+  +endpoint('GET', '/comments/comment/:comment', '#get_comment_comments')
   +endpoint('POST', '/comment/create', '#post_comment_create')
-  +endpoint('POST', '/comment/update/:id', '#post_comment_create')
-  +endpoint('POST', '/comment/delete/:id', '#post_comment_create')
+  +endpoint('POST', '/comment/update/:comment', '#post_comment_update')
+  +endpoint('POST', '/comment/delete/:comment', '#post_comment_delete')
   .category User
   +endpoint('POST', '/user/login', '#post_user_login')
   +endpoint('POST', '/user/register', '#post_user_register')

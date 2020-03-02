@@ -1,8 +1,67 @@
 block content
-  h1 PostTags api
-  .endpoint
-    h2 <span>POST</span>/postTags/:post/:tag/create
+  h1 PostTags API
+  .endpoint#post_posttag_create
+    h2 <span>POST</span>/posttag/create
     p.
-      Creates a tag for a specific post. A vote from the user who created it should also be created. If the tag doesn't exist, a tag should be created as well with the user as the creator. 
+      Adds a tag to a post. 
 
     +auth
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+        "score": 1
+      }
+
+  .endpoint#post_posttag_add_vote
+    h2 <span>POST</span>/posttag/add-vote
+    p.
+      Adds a vote for a posttag.
+
+    +auth
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+        "score": 41
+      }
+
+  .endpoint#post_posttag_remove_vote
+    h2 <span>POST</span>/posttag/remove-vote
+    p.
+      Removes an existing vote for a posttag. If it is the only vote for it, this action also removes the posttag.
+
+    +auth
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "post": "a-cool-painting",
+        "tag": "art",
+        "score": 40
+      }
