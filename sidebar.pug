@@ -18,7 +18,7 @@ mixin endpoint(type, path, id, todo)
   a.endpoint(href="#model_comment_vote") CommentVote
   .category Posts
   +endpoint('GET', '/posts', '#get_posts')
-  +endpoint('GET', '/post/view/:url', '#get_post')
+  +endpoint('GET', '/post/view/:url', '#get_view_post')
   +endpoint('POST', '/post/create/:url', '#post_post_create')
   +endpoint('POST', '/post/update/:url', '#post_post_update', true)
   +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)

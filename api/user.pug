@@ -1,0 +1,45 @@
+block content
+  h1 User API
+  .endpoint#post_user_login
+    h2 <span>POST</span> /user/login
+    p.
+      Logs the user in. Returns a JWT.
+    
+    h3 Example payload
+    :code(javascript)
+      {
+        "email": "jjcm@non.io",
+        "password": "hunter2"
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "username":"jjcm"
+      }
+
+  .endpoint#post_user_register
+    h2 <span>POST</span> /user/register
+    p.
+      Logs the user in. Returns a JWT.
+
+    h3 Example payload
+    :code(javascript)
+      {
+        "username": "jjcm",
+        "email": "jjcm@non.io",
+        "password": "hunter2",
+        "contribution": "5",
+        "creditCardName": "Jake Miller",
+        "creditCardNumber": "1111-2222-3333-4444",
+        "creditCardExp": "2130-01-01",
+        "creditCardCCV": "420"
+      }
+    
+    h3 Example response
+    :code(javascript)
+      {
+        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "username":"jjcm"
+      }
