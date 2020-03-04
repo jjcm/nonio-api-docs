@@ -1,6 +1,12 @@
+mixin endpoint
+  .endpoint&attributes(attributes)
+    .content
+      if block
+        block
+
 block content
   h1 User API
-  .endpoint#post_user_login
+  +endpoint#post_user_login
     h2 <span>POST</span> /user/login
     p.
       Logs the user in. Returns a JWT.
@@ -19,7 +25,7 @@ block content
         "username":"jjcm"
       }
 
-  .endpoint#post_user_register
+  +endpoint#post_user_register
     h2 <span>POST</span> /user/register
     p.
       Logs the user in. Returns a JWT.

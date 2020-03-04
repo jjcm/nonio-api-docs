@@ -1,6 +1,12 @@
+mixin endpoint
+  .endpoint&attributes(attributes)
+    .content
+      if block
+        block
+
 block content
   h1 PostTags API
-  .endpoint#post_posttag_create
+  +endpoint#post_posttag_create
     h2 <span>POST</span>/posttag/create
     p.
       Adds a tag to a post. 
@@ -22,7 +28,7 @@ block content
         "score": 1
       }
 
-  .endpoint#post_posttag_add_vote
+  +endpoint#post_posttag_add_vote
     h2 <span>POST</span>/posttag/add-vote
     p.
       Adds a vote for a posttag.
@@ -44,7 +50,7 @@ block content
         "score": 41
       }
 
-  .endpoint#post_posttag_remove_vote
+  +endpoint#post_posttag_remove_vote
     h2 <span>POST</span>/posttag/remove-vote
     p.
       Removes an existing vote for a posttag. If it is the only vote for it, this action also removes the posttag.

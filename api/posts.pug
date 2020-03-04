@@ -1,3 +1,9 @@
+mixin endpoint
+  .endpoint&attributes(attributes)
+    .content
+      if block
+        block
+
 mixin auth
   h3 Requirements
   ul 
@@ -11,7 +17,7 @@ block content
   h1 Posts API
   .endpoints
     .column
-      .endpoint#get_posts
+      +endpoint#get_posts
         h2 <span>GET</span> /posts
         p Returns 100 posts.
         h3 Parameters
@@ -130,7 +136,7 @@ block content
         
 
     .column
-      .endpoint#get_view_post
+      +endpoint#get_view_post
         h2 <span>GET</span> /post/view/:url
         p.
           Returns the data for a single post, referenced by its url.
@@ -171,7 +177,7 @@ block content
           }
           
 
-      .endpoint#post_post_create
+      +endpoint#post_post_create
         h2 <span>POST</span> /post/create
         p.
           Accepts a JSON payload to create a new post in the database
@@ -204,7 +210,7 @@ block content
           }
 
 
-      .endpoint#get_post_url_is_available
+      +endpoint#get_post_url_is_available
         h2 <span>GET</span> /post-url-is-available/:url
         p.
           Returns a boolean based on if the requested URL is available

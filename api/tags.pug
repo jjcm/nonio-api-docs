@@ -1,3 +1,9 @@
+mixin endpoint
+  .endpoint&attributes(attributes)
+    .content
+      if block
+        block
+
 mixin auth
   h3 Requirements
   ul 
@@ -9,7 +15,7 @@ mixin auth
 
 block content
   h1 Tags API
-  .endpoint#get_tags
+  +endpoint#get_tags
     h2 <span>GET</span> /tags
     p.
       Should return 100 tags, sorted by number of postTags for that tag that have been created between now and the requesting user's last login, or one month, whichever is longer. The number of postTags for that tag should be populated into the "count" field. 

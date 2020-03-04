@@ -1,3 +1,9 @@
+mixin endpoint
+  .endpoint&attributes(attributes)
+    .content
+      if block
+        block
+
 mixin auth
   h3 Requirements
   ul 
@@ -31,7 +37,7 @@ mixin topSubpaths(path, entity)
 
 block content
   h1 Comments API
-  .endpoint#get_post_comments
+  +endpoint#get_post_comments
     h2 <span>GET</span> /comments/post/:post
     p.
       Should return 100 comments for a specific post. 
@@ -85,7 +91,7 @@ block content
 
         ]
       }
-  .endpoint#get_user_comments
+  +endpoint#get_user_comments
     h2 <span>GET</span> /comments/user/:user
     p.
       Should return 100 comments for a specific user. 
@@ -140,7 +146,7 @@ block content
         ]
       }
 
-  .endpoint#get_comment_comments
+  +endpoint#get_comment_comments
     h2 <span>GET</span> /comments/comment/:comment
     p.
       Should return a comment and all of its descendants, plus a parent comment if it exists. Child comments and other descendants should be arranged in a parent-child relationship. Comments at the same level of hierarchy should be sorted by (upvotes - downvotes). 
@@ -207,7 +213,7 @@ block content
         ]
       }
 
-  .endpoint#post_comment_create
+  +endpoint#post_comment_create
     h2 <span>POST</span> /comment/create
     p.
       Allows the creation of a comment on a specific post. Can either be a top level comment or a reply to an existing comment.
@@ -234,7 +240,7 @@ block content
         "parent": null
       }
 
-  .endpoint#post_comment_update
+  +endpoint#post_comment_update
     h2 <span>POST</span> /comment/update/:comment
     p.
       Allows for the update of a specific comment. Comment must be made by the user updating it.
@@ -261,7 +267,7 @@ block content
         "parent": null
       }
 
-  .endpoint#post_comment_delete
+  +endpoint#post_comment_delete
     h2 <span>POST</span> /comment/delete/:comment
     p.
       Deletes a specific comment. Comment must be made by the user deleting it.
