@@ -31,7 +31,7 @@ block content
       ul 
         li 
           h4 top <span>default</span>
-          p Tags are sorted by score.
+          p Tags are sorted by count.
         li 
           h4 new
           p Tags are sorted by date. Newest first.
@@ -59,27 +59,17 @@ block content
     h3 Example response
     :code(javascript)
       {
-        tags: [
-          {
-            "name": "funny", 
-            "createdBy": "mrWilson",
-            "admins": [
-              "jimboslice", "dolores68", "choppaChunka"
-            ],
-            "createdDate": "2018-02-13 1:02pm",
-            "count": 28
-          },
-          {
-            "name": "news", 
-            "createdBy": "phildawg",
-            "admins": [
-              "jimboslice", "dolores68", "choppaChunka"
-            ],
-            "createdDate": "2018-02-11 11:28am"
-            "count": 22
-          },
-          
-          ...etc
+        "tags": [
+            {
+                "tag": "art",
+                "count": 4849,
+            },
+            {
+                "tag": "funny",
+                "count": 382,
+            },
 
+            // ...etc
+          }
         ]
       }
