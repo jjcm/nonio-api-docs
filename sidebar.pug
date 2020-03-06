@@ -39,7 +39,7 @@ mixin endpoint(type, path, id, todo)
   .category User
   +endpoint('POST', '/user/login', '#post_user_login')
   +endpoint('POST', '/user/register', '#post_user_register')
-  +endpoint('GET', '/user/username-is-available', '#get_user_username_is_available')
+  +endpoint('GET', '/user/username-is-available/:username', '#get_user_username_is_available')
 
 
   .logo
