@@ -49,3 +49,15 @@ block content
         "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
         "username":"jjcm"
       }
+  
+  +endpoint#get_user_username_is_available
+    h2 <span>GET</span> /user/username-is-available/:url
+    p.
+      Returns a boolean based on if the requested username is available
+
+    h3 Requirements
+    p None. Should be available publicly
+
+    h3 Example response
+    :code(javascript)
+      true

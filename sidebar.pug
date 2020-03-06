@@ -22,7 +22,7 @@ mixin endpoint(type, path, id, todo)
   +endpoint('POST', '/post/create/:url', '#post_post_create')
   +endpoint('POST', '/post/update/:url', '#post_post_update', true)
   +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)
-  +endpoint('GET', '/post-url-is-available', '#get_post_url_is_available')
+  +endpoint('GET', '/post/url-is-available/:url', '#get_post_url_is_available')
   .category Tags
   +endpoint('GET', '/tags', '#get_tags')
   .category PostTags
@@ -39,6 +39,7 @@ mixin endpoint(type, path, id, todo)
   .category User
   +endpoint('POST', '/user/login', '#post_user_login')
   +endpoint('POST', '/user/register', '#post_user_register')
+  +endpoint('GET', '/user/username-is-available', '#get_user_username_is_available')
 
 
   .logo
