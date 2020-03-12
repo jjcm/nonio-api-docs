@@ -42,15 +42,17 @@ block content
       h2 Comment
       :code(javascript)
         comment: {
+          id: String
+          time: Number,
           post: 'post',
-          date: Number,
+          parent: 'comment'
+          childCount: Number,
           content: String,
-          text: String,
           user: 'username',
           upvotes: Number,
           downvotes: Number,
-          parent: 'comment'
-          children: Array('comment')
+          threadUpvotes: Number,
+          threadDownvotes: Number
         }
     .model#model_comment_vote
       h2 CommentVote
