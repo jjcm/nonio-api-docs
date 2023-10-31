@@ -76,13 +76,18 @@ block content
           {
             posts: [
               {
+                "id": 2,
                 "title": "test post",
-                "url": "this_is_crazy",
                 "user": "wombodombo",
-                "score": 148,
                 "time": "1577171754000",
-                "content": "This is a cool photo I took of my cat way back when",
+                "url": "this_is_crazy",
+                "link": "", //optional
+                "content": "{\"ops\":[{\"insert\":\"This is a cool photo.\\n\"}]}", //quilljs formatted content
                 "type": "image",
+                "score": 148,
+                "commentCount": 21,
+                "width": 1920, //will appear for video and image content
+                "height": 1080, //will appear for video and image content
                 "tags": [
                   {
                     "tag": "funny",
@@ -119,13 +124,18 @@ block content
         h3 Example response
         :code(javascript)
           {
+            "id": 2,
             "title": "test post",
-            "url": "this_is_crazy",
             "user": "wombodombo",
-            "score": 148,
             "time": "1577171754000",
-            "content": "This is a cool photo I took of my cat way back when",
+            "url": "this_is_crazy",
+            "link": "", //optional
+            "content": "{\"ops\":[{\"insert\":\"This is a cool photo.\\n\"}]}", //quilljs formatted content
             "type": "image",
+            "score": 148,
+            "commentCount": 21,
+            "width": 1920, //will appear for video and image content
+            "height": 1080, //will appear for video and image content
             "tags": [
               {
                 "tag": "funny",

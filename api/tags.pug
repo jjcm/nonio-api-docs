@@ -20,41 +20,42 @@ block content
     p.
       Should return 100 tags, sorted by number of postTags for that tag that have been created between now and the requesting user's last login, or one month, whichever is longer. The number of postTags for that tag should be populated into the "count" field. 
     
-    +auth
-    h3 Parameters
-    .param ?offset=<span>NUMBER</span>
-    p Offsets the responses by a set number.
+    //
+      +auth
+      h3 Parameters
+      .param ?offset=<span>NUMBER</span>
+      p Offsets the responses by a set number.
 
-    .parameter
-      .param ?sort=<span class="default">top</span>|<span>new</span>
-      p Returns tags sorted by a particular algorithm.
-      ul 
-        li 
-          h4 top <span>default</span>
-          p Tags are sorted by count.
-        li 
-          h4 new
-          p Tags are sorted by date. Newest first.
+      .parameter
+        .param ?sort=<span class="default">top</span>|<span>new</span>
+        p Returns tags sorted by a particular algorithm.
+        ul 
+          li 
+            h4 top <span>default</span>
+            p Tags are sorted by count.
+          li 
+            h4 new
+            p Tags are sorted by date. Newest first.
 
-    .parameter
-      .param ?time=<span class="default">all</span>|<span>day</span>|<span>week</span>|<span>month</span>|<span>year</span>
-      p Only returns tags that were created within a specific time period.
-      ul 
-        li 
-          h4 all <span>default</span>
-          p No time constraints.
-        li 
-          h4 day
-          p Only returns tags created in the last day.
-        li 
-          h4 week
-          p Only returns tags created in the last week.
-        li 
-          h4 month
-          p Only returns tags created in the last month.
-        li 
-          h4 year
-          p Only returns tags created in the last year.
+      .parameter
+        .param ?time=<span class="default">all</span>|<span>day</span>|<span>week</span>|<span>month</span>|<span>year</span>
+        p Only returns tags that were created within a specific time period.
+        ul 
+          li 
+            h4 all <span>default</span>
+            p No time constraints.
+          li 
+            h4 day
+            p Only returns tags created in the last day.
+          li 
+            h4 week
+            p Only returns tags created in the last week.
+          li 
+            h4 month
+            p Only returns tags created in the last month.
+          li 
+            h4 year
+            p Only returns tags created in the last year.
 
     h3 Example response
     :code(javascript)
