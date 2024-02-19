@@ -38,6 +38,7 @@ mixin endpoint(type, path, id, todo)
   +endpoint('POST', '/comment/delete/:comment', '#post_comment_delete', true)
   .category User
   +endpoint('POST', '/user/login', '#post_user_login')
+  +endpoint('POST', '/user/refresh-access-token', '#post_user_refresh_access_token')
   +endpoint('POST', '/user/register', '#post_user_register')
   +endpoint('GET', '/user/username-is-available/:username', '#get_user_username_is_available')
   .category Notifications

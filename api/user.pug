@@ -21,14 +21,35 @@ block content
     h3 Example response
     :code(javascript)
       {
-        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpAampjbS5vcmciLCJleHBpcmVzQXQiOjE3NDQ2NzE2MjksInR5cGUiOiJyZWZyZXNoIn0.wBnYbLB6kGinMRnM1ODqGmV1cv-VYMBzPZUNGsRDGqU",
+        "roles": ["admin"], // typically empty, right now this is only used for admins
         "username":"jjcm"
+
+      }
+
+  +endpoint#post_user_refresh_access_token
+    h2 <span>POST</span> /user/refresh-access-token
+    p.
+      Refreshes the access token. Returns a new access token and a new refresh token. 
+    
+    h3 Example payload
+    :code(javascript)
+      {
+        "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpAampjbS5vcmciLCJleHBpcmVzQXQiOjE3NDQ2NzE2MjksInR5cGUiOiJyZWZyZXNoIn0.wBnYbLB6kGinMRnM1ODqGmV1cv-VYMBzPZUNGsRDGqU",
+      }
+
+    h3 Example response
+    :code(javascript)
+      {
+        "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpAampjbS5vcmciLCJleHBpcmVzQXQiOjE3MDg5ODg2NzIsInR5cGUiOiJhY2Nlc3MifQ.m1vCcqE41C11us1WZnn2suxCMmRh5kcrzd200BaCips",
+        "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpAampjbS5vcmciLCJleHBpcmVzQXQiOjE3NDQ2NzE4NzIsInR5cGUiOiJyZWZyZXNoIn0.D_NunlFZBMR73ryqlcKBzLZaZnGyP3LyzW6m0JQy0nM",
       }
 
   +endpoint#post_user_register
     h2 <span>POST</span> /user/register
     p.
-      Logs the user in. Returns a JWT.
+      Creates a new user. Returns the registered info along with an access token and a refresh token.
 
     h3 Example payload
     :code(javascript)
@@ -36,17 +57,13 @@ block content
         "username": "jjcm",
         "email": "jjcm@non.io",
         "password": "hunter2",
-        "contribution": "5",
-        "creditCardName": "Jake Miller",
-        "creditCardNumber": "1111-2222-3333-4444",
-        "creditCardExp": "2130-01-01",
-        "creditCardCCV": "420"
       }
     
     h3 Example response
     :code(javascript)
       {
-        "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFzZGZAYXNkZi5jb20iLCJleHBpcmVzQXQiOjE1ODMxNDc1NDh9.okbK22xZYZFk19K_NwLd7g48mxQZfWR5filMadonSe8",
+        "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpAampjbS5vcmciLCJleHBpcmVzQXQiOjE3NDQ2NzE2MjksInR5cGUiOiJyZWZyZXNoIn0.wBnYbLB6kGinMRnM1ODqGmV1cv-VYMBzPZUNGsRDGqU",
         "username":"jjcm"
       }
   
