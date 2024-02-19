@@ -40,6 +40,11 @@ mixin endpoint(type, path, id, todo)
   +endpoint('POST', '/user/login', '#post_user_login')
   +endpoint('POST', '/user/register', '#post_user_register')
   +endpoint('GET', '/user/username-is-available/:username', '#get_user_username_is_available')
+  .category Notifications
+  a.endpoint(href="#model_notification") Model
+  +endpoint('GET', '/notifications', '#get_notifications')
+  +endpoint('GET', '/notifications/unread-count', '#get_notification_count')
+  +endpoint('POST', '/notification/mark-read', '#post_notification_mark_read')
 
 
   .logo
