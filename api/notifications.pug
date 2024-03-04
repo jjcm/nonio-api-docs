@@ -24,11 +24,13 @@ block content
             "date": Number,
             "post": String, //refers to the post's url
             "post_title": String,
+            "post_type": String,
             "content": String, //rich text in Quill format
             "user": String,
             "upvotes": Number,
             "downvotes": Number,
             "parent": Number,
+            "parent_content": String, //rich text in Quill format
             "edited": Boolean,
             "read": Boolean
         }
@@ -61,11 +63,13 @@ block content
               "date": 1691296535000,
               "post": "nonio-changelog-9",
               "post_title": "Nonio update - Notifications and guest contributions",
+              "post_type": "blog",
               "content": "{\"ops\":[{\"insert\":\"Nice work!\\n\"}]}",
               "user": "avocado",
               "upvotes": 1,
               "downvotes": 0,
               "parent": 0,
+              "parent_content": "",
               "edited": false,
               "read": true
           },
@@ -75,11 +79,13 @@ block content
               "date": 1691297044000,
               "post": "avo-coffeeshop",
               "post_title": "Avocado the dog",
+              "post_type": "image",
               "content": "{\"ops\":[{\"insert\":\"Thank you Avo, very cool!\\n\"}]}",
               "user": "kate",
               "upvotes": 1,
               "downvotes": 0,
               "parent": 0,
+              "parent_content": "",
               "edited": false,
               "read": true
           },
