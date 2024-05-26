@@ -148,6 +148,66 @@ block content
             ]
           }
 
+      h2#post_creation Post Creation
+      p Submitting posts on nonio is a multi-step process, depending on the type of post you are submitting.
+      p For text posts, you can submit the post directly to the /post/create endpoint.
+      p For link posts, you will want to submit the URL to the /post/parse-external-url endpoint to get a summary of the opengraph data for the URL, and then submit the post to the /post/create endpoint with the data you received from the /post/parse-external-url endpoint. This isn't required, but it will give you information you likely want to include in your post.
+      p For image and video posts, you will need to go through the following steps in order: 
+      ol
+        li Upload the media to image.non.io, or video.non.io respectively. This will return a temporary name for the media after the media has encoded. You must wait for the encoding step to finish.
+        li Submit to the /post/create endpoint to create the post. This will return the url for the post. 
+        li Create a post to image.non.io/move or video.non.io/move with the temporary name and the url of the post. This will move the media to the correct location and associate it with the post.
+      
+      h2#post_creation_example Example post creation flow 
+      p This will walk through the steps needed to create an image post. 
+
+      h3 Step 1: Upload the image
+      h4 <span>POST</span> https://image.non.io/upload
+      h5 Payload
+      :code(javascript)
+        //form data
+        files: (binary)
+
+      h5 Response
+      p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
+      :code(javascript)
+        4e4b2709-e82e-415d-ae6d-5e9f1efaaae8
+
+      h3 Step 2: Submit the post
+      h4 <span>POST</span> https://api.non.io/post/create
+      h5 Payload
+      :code(javascript)
+        {
+          "title": "My Cool Post!",
+          "url": "my-neato-post-wow",
+          "content": "This is the long form content for this post...",
+          "type": "blog"
+        }
+
+      h5 Response
+      p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
+      :code(javascript)
+        {
+            "title": "My Cool Post!",
+            "user": "lapubell",
+            "time": "1577171754000",
+            "url": "my-neto-post-wow",
+            "tags": []
+        }
+
+      h3 Step 3: Move the image
+      h4 <span>POST</span> https://image.non.io/move
+      h5 Payload
+      :code(javascript)
+        //form data
+        oldUrl: "5e4b2709-e92e-415d-ae6d-5e9f1efaaae8"
+        url: "my-neato-post-wow"
+
+      h5 Response
+      p Responds with the moved image name
+      :code(javascript)
+        my-neato-post-wow
+
       +endpoint#post_post_create
         h2 <span>POST</span> /post/create
         p.
