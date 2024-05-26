@@ -23,6 +23,7 @@ mixin endpoint(type, path, id, todo)
   +endpoint('POST', '/post/update/:url', '#post_post_update', true)
   +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)
   +endpoint('GET', '/post/url-is-available/:url', '#get_post_url_is_available')
+  +endpoint('POST', '/post/parse-external-url', '#post_post_parse_external_url')
   .category Tags
   +endpoint('GET', '/tags', '#get_tags')
   .category PostTags
