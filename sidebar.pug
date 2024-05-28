@@ -19,6 +19,7 @@ mixin endpoint(type, path, id, todo)
   .category Posts
   +endpoint('GET', '/posts', '#get_posts')
   +endpoint('GET', '/post/view/:url', '#get_view_post')
+  a.endpoint(href="#post_creation") Post creation
   +endpoint('POST', '/post/create/:url', '#post_post_create')
   +endpoint('POST', '/post/update/:url', '#post_post_update', true)
   +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)
