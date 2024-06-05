@@ -20,6 +20,8 @@ mixin endpoint(type, path, id, todo)
   +endpoint('GET', '/posts', '#get_posts')
   +endpoint('GET', '/post/view/:url', '#get_view_post')
   a.endpoint(href="#post_creation") Post creation
+  a.endpoint(href="#image_post_creation_example") Image upload example
+  a.endpoint(href="#video_post_creation_example") Video upload example
   +endpoint('POST', '/post/create/:url', '#post_post_create')
   +endpoint('POST', '/post/update/:url', '#post_post_update', true)
   +endpoint('POST', '/post/delete/:url', '#post_post_delete', true)

@@ -148,65 +148,173 @@ block content
           ]
         }
 
-    h2#post_creation Post Creation
-    p Submitting posts on nonio is a multi-step process, depending on the type of post you are submitting.
-    p For text posts, you can submit the post directly to the /post/create endpoint.
-    p For link posts, you will want to submit the URL to the /post/parse-external-url endpoint to get a summary of the opengraph data for the URL, and then submit the post to the /post/create endpoint with the data you received from the /post/parse-external-url endpoint. This isn't required, but it will give you information you likely want to include in your post.
-    p For image and video posts, you will need to go through the following steps in order: 
-    ol
-      li Upload the media to image.non.io, or video.non.io respectively. This will return a temporary name for the media after the media has encoded. You must wait for the encoding step to finish.
-      li Submit to the /post/create endpoint to create the post. This will return the url for the post. 
-      li Create a post to image.non.io/move or video.non.io/move with the temporary name and the url of the post. This will move the media to the correct location and associate it with the post.
+    +endpoint#post_creation
+      h2 Post Creation
+      p Submitting posts on nonio is a multi-step process, depending on the type of post you are submitting.
+      p For text posts, you can submit the post directly to the /post/create endpoint.
+      p For link posts, you will want to submit the URL to the /post/parse-external-url endpoint to get a summary of the opengraph data for the URL, and then submit the post to the /post/create endpoint with the data you received from the /post/parse-external-url endpoint. This isn't required, but it will give you information you likely want to include in your post.
+      p For image and video posts, you will need to go through more complicated steps, which are detailed below.
     
-    h2#post_creation_example Example post creation flow 
-    p This will walk through the steps needed to create an image post. 
+    +endpoint#image_post_creation_example
+      h2 Example image post creation flow 
+      p This will walk through the steps needed to create an image post. 
 
-    h3 Step 1: Upload the image
-    h4 <span>POST</span> https://image.non.io/upload
-    h5 Payload
-    :code(javascript)
-      //form data
-      files: (binary)
+      h3 Step 1: Upload the image
+      h4 <span>POST</span> https://image.non.io/upload
+      h5 Payload
+      :code(javascript)
+        //form data
+        files: (binary)
 
-    h5 Response
-    p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
-    :code(javascript)
-      4e4b2709-e82e-415d-ae6d-5e9f1efaaae8
+      h5 Response
+      p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
+      :code(javascript)
+        4e4b2709-e82e-415d-ae6d-5e9f1efaaae8
 
-    h3 Step 2: Submit the post
-    h4 <span>POST</span> https://api.non.io/post/create
-    h5 Payload
-    :code(javascript)
-      {
-        "title": "My Cool Post!",
-        "url": "my-neato-post-wow",
-        "content": "This is the long form content for this post...",
-        "type": "blog"
-      }
+      h3 Step 2: Move the image
+      h4 <span>POST</span> https://image.non.io/move
+      h5 Payload
+      :code(javascript)
+        //form data
+        oldUrl: "5e4b2709-e92e-415d-ae6d-5e9f1efaaae8"
+        url: "my-neato-image-wow"
 
-    h5 Response
-    p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
-    :code(javascript)
-      {
-          "title": "My Cool Post!",
+      h5 Response
+      p Responds with the moved image name
+      :code(javascript)
+        my-neato-image-wow
+
+      h3 Step 3: Submit the post
+      h4 <span>POST</span> https://api.non.io/post/create
+      h5 Payload
+      :code(javascript)
+        {
+          "title": "My Cool Image!",
+          "url": "my-neato-image-wow",
+          "content": "{\"ops\":[{\"insert\":\"Some content\\n\"}]}",
+          "link": null,
+          "type": "image",
+          "tags": ["tag1","tag2"],
+          "width": 1236,
+          "height": 942
+        }
+
+      h5 Response
+      p Responds with the temporary name of the image after encoding. This can be accessed via https://image.non.io/${tempName}.webp or via other file extensions. 
+      :code(javascript)
+        {
+          "ID": 28,
+          "title": "My Cool Image!",
           "user": "lapubell",
-          "time": "1577171754000",
-          "url": "my-neto-post-wow",
-          "tags": []
-      }
+          "time": 1717534937000,
+          "url": "my-neto-image-wow",
+          "link": "",
+          "content":"{\"ops\":[{\"insert\":\"Some content\\n\"}]}",
+          "type": "image",
+          "score": 1,
+          "commentCount": 0,
+          "tags": ["tag1","tag2"],
+          "width": 1236,
+          "height": 942
+        }
+    
+    +endpoint#video_post_creation_example
+      h2 Example video post creation flow 
+      p This will walk through the steps needed to create an video post. This is similar to the image post creation flow, but because videos take a long time to encode, there's an additional websocket connection to get the progress of the encoding for each resolution.
 
-    h3 Step 3: Move the image
-    h4 <span>POST</span> https://image.non.io/move
-    h5 Payload
-    :code(javascript)
-      //form data
-      oldUrl: "5e4b2709-e92e-415d-ae6d-5e9f1efaaae8"
-      url: "my-neato-post-wow"
+      h3 Step 1: Upload the video
+      h4 <span>POST</span> https://video.non.io/upload
 
-    h5 Response
-    p Responds with the moved image name
-    :code(javascript)
-      my-neato-post-wow
+      h5 Payload
+      :code(javascript)
+        //form data
+        files: (binary)
+
+      h5 Response
+      p Responds with the temporary name of the video before encoding. You will need to encode the video first before viewing it.
+      :code(javascript)
+        video-1234567890.mp4
+
+      h3 Step 2: Encode the video
+      p You will need to connect to a websocket to get the progress of the encoding. This will return the temporary name of the video after encoding.
+      h4 <span>GET</span> wss://video.non.io/encode?file=video-1234567890.mp4
+
+      h5 Payload
+      :code(javascript)
+        //query string parameters
+        file: video-1234567890.mp4
+      
+      h5 Response
+      p The response will be a series of messages from the websocket that will give you the progress of the encoding, for each resolution it's encoding to.
+      p Resolutions supported are 480p, 720p, 1080p, 1440p, 2160p, and 4320p. The native resolution will simply be named source, and encodings will be made of resolutions lower than that. 
+      :code(javascript)
+        // The first message will be the detected resolution of the source file
+        resolution:1376x802
+
+        // The next messages will be progress of encoding for each resolution. Encoding will begin with the lowest resolution first, and work its way up to the source resolution.
+        480p:0.0 // 0% complete
+        480p:55.3
+        480p:77.2
+        480p:100
+
+        720p:0.0
+        720p:13.8
+        ...etc
+
+        // The largest resolution is always named `source`, and is the original resolution of the video.
+        source:0.0
+        source:7.2
+        source:100
+
+      p The final message will be source:100, after that the file will be available for viewing. At the following url:
+      :code(javascript)
+        https://video.non.io/video-1234567890.mp4
+
+      h3 Step 3: Move the video
+      h4 <span>POST</span> https://video.non.io/move
+      h5 Payload
+      :code(javascript)
+        //form data
+        oldUrl: "video-1234567890"
+        url: "my-neato-video-wow"
+
+      h5 Response
+      p Responds with the moved image name
+      :code(javascript)
+        my-neato-post-wow
+
+      h3 Step 3: Submit the post
+      h4 <span>POST</span> https://api.non.io/post/create
+      h5 Payload
+      :code(javascript)
+        {
+          "title": "My Cool Video!",
+          "url": "my-neato-video-wow",
+          "content": "{\"ops\":[{\"insert\":\"Some content\\n\"}]}",
+          "link": null,
+          "type": "video",
+          "tags": ["tag1","tag2"],
+          "width": 1236,
+          "height": 942
+        }
+
+      h5 Response
+      :code(javascript)
+        {
+          "ID": 29,
+          "title": "My Cool Video!",
+          "user": "lapubell",
+          "time": 1717534937000,
+          "url": "my-neto-video-wow",
+          "link": "",
+          "content":"{\"ops\":[{\"insert\":\"Some content\\n\"}]}",
+          "type": "video",
+          "score": 1,
+          "commentCount": 0,
+          "tags": ["tag1","tag2"],
+          "width": 1236,
+          "height": 942
+        }
 
     +endpoint#post_post_create
       h2 <span>POST</span> /post/create
